@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Fresh Vegetables</title>
+    <link rel="stylesheet" href="plan.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Farm Fresh Vegetables Wholesale</h1>
+        <p>Connecting Farmers with Businesses and Consumers</p>
+    </div>
+
+    <div class="footer">
+        <p>2024 Farm Fresh. All rights reserved.</p>
+    </div>
+    
+    <div class="plans" id="plans">
+        <h2>Select Your Plan</h2>
+        <div class="plan-card" onclick="selectPlan('Standard', 3000, 5)">
+            <h3>Standard Plan</h3>
+            <p>Price: ₹3000</p>
+            <p>5 seasonal vegetables</p>
+        </div>
+        <div class="plan-card" onclick="selectPlan('Family', 5000, 10)">
+            <h3>Family Plan</h3>
+            <p>Price: ₹5000</p>
+            <p>10 seasonal vegetables</p>
+        </div>
+        <div class="plan-card" onclick="selectPlan('Custom', 0, 0)">
+            <h3>Custom Plan</h3>
+            <p>Design your own package!</p>
+        </div>
+    </div>
+
+    <div id="details" class="hidden">
+        <h2>Plan Details</h2>
+        <h3>Included Vegetables:</h3>
+        <div id="vegetable-list" class="vegetable-list"></div>
+    </div>
+
+    <div id="customer-form">
+        <h2>Customer Details</h2>
+        <div class="form-container">
+
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <textarea id="address" placeholder="Enter your address" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="selected-plan">Selected Plan:</label>
+                <input type="text" id="selected-plan" readonly required>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="text" id="amount" readonly required>
+            </div>
+
+            <div class="form-group">
+                <label for="paymentMethod">Payment Method:</label>
+                <select id="paymentMethod" required>
+                    <option value="Net Banking">Net Banking</option>
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="UPI">UPI</option>
+                </select>
+            </div>
+
+            <button onclick="submitOrder()">Subscribe</button>
+
+            <div id="confirmation" style="margin-top: 10px;"></div>
+        </div>
+    </div>
+
+    </div>
+
+    <script>
+    
+        const vegetablePlans = {
+            "Standard": ["Tomato", "Potato", "Carrot", "Onion", "Capsicum"],
+            "Family": ["Tomato", "Potato", "Carrot", "Onion", "Capsicum", "Cucumber", "Spinach", "Cabbage", "Garlic", "Ginger"],
+            "Custom": ["Tomato", "Potato", "Carrot", "Onion", "Cabbage"] 
+        };
+
+    
+        function selectPlan(plan, price, count) {
+            document.getElementById("details").classList.remove("hidden");
+            document.getElementById("customer-form").classList.remove("hidden");
+
+            document.getElementById("selected-plan").value = plan;
+            document.getElementById("amount").value = price === 0 ? "Custom Pricing" : `₹${price}`;
+
+            let vegList = document.getElementById("vegetable-list");
+            vegList.innerHTML = ""; // Clear previous content
+
+            if (plan === "Custom") {
+                displayCustomPlan(); // Show custom plan with images and dropdowns
+            } else if (plan === "Family") {
+                displayFamilyPlan(); // Show Family Plan in two columns
+            } else {
+                displayStandardPlan(); // Show Standard Plan in a single column
+            }
+        }
+
+
+
+        // Function to display Standard Plan vegetables
+        function displayStandardPlan() {
+            let vegList = document.getElementById("vegetable-list");
+            vegList.className = "vegetable-list standard-list";
+
+            vegetablePlans["Standard"].forEach((veg, index) => {
+                let vegItem = document.createElement("div");
+                vegItem.className = "veg-item";
+
+                let number = document.createElement("span");
+                number.className = "veg-number";
+                number.textContent = `${index + 1}.`;
+
+                let name = document.createElement("span");
+                name.className = "veg-name";
+                name.textContent = veg;
+
+                vegItem.appendChild(number);
+                vegItem.appendChild(name);
+                vegList.appendChild(vegItem);
+            });
+        }
+
+
+
+        // Function to display Family Plan vegetables in two columns
+        function displayFamilyPlan() {
+            let vegList = document.getElementById("vegetable-list");
+            vegList.className = "vegetable-list family-list";
+
+            let firstColumn = document.createElement("div");
+            firstColumn.className = "column";
+            let secondColumn = document.createElement("div");
+            secondColumn.className = "column";
+
+            vegetablePlans["Family"].forEach((veg, index) => {
+                let vegItem = document.createElement("div");
+                vegItem.className = "veg-item";
+
+                let number = document.createElement("span");
+                number.className = "veg-number";
+                number.textContent = `${index + 1}.`;
+
+                let name = document.createElement("span");
+                name.className = "veg-name";
+                name.textContent = veg;
+
+                vegItem.appendChild(number);
+                vegItem.appendChild(name);
+
+                if (index < 5) {
+                    firstColumn.appendChild(vegItem);
+                } else {
+                    secondColumn.appendChild(vegItem);
+                }
+            });
+
+            vegList.appendChild(firstColumn);
+            vegList.appendChild(secondColumn);
+        }
+
+
+
+        // Function to display Custom Plan vegetables in a flex row
+        function displayCustomPlan() {
+            let vegList = document.getElementById("vegetable-list");
+            vegList.className = "vegetable-list custom-list";
+
+            vegetablePlans["Custom"].forEach(veg => {
+                let vegCard = document.createElement("div");
+                vegCard.className = "veg-card";
+
+                let img = document.createElement("img");
+                img.src = `image/${veg.toLowerCase()}.jpg`; // Ensure images exist
+                img.alt = veg;
+
+                let name = document.createElement("p");
+                name.textContent = veg;
+
+                let select = document.createElement("select");
+                select.innerHTML = `
+                    <option value="1">1 kg</option>
+                    <option value="2">2 kg</option>
+                    <option value="3">3 kg</option>
+                    <option value="4">4 kg</option>
+                `;
+
+                vegCard.appendChild(img);
+                vegCard.appendChild(name);
+                vegCard.appendChild(select);
+                vegList.appendChild(vegCard);
+            });
+        }
+
+
+ function submitOrder() {
+    const username = sessionStorage.getItem("username");
+
+    if (!username) {
+        alert("You must be logged in to subscribe.");
+        window.location.href = "login.html";
+        return;
+    }
+
+    const plan = document.getElementById("selected-plan").value;
+    const amount = document.getElementById("amount").value;
+    const address = document.getElementById("address").value;
+    const paymentMethod = document.querySelector("select").value;
+
+    if (address === "") {
+        alert("Please fill in your address.");
+        return;
+    }
+
+    const data = { plan, amount, address, paymentMethod };
+
+    fetch(`http://localhost:8080/api/subscription/subscribe/${username}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.text())
+    .then(msg => {
+        alert(msg);
+        if (msg.includes("saved")) {
+            window.location.href = "main.html";
+        }
+    });
+}
+ async function submitOrder() {
+        const loggedIn = sessionStorage.getItem("loggedIn");
+        const email = sessionStorage.getItem("email");
+
+        if (!loggedIn || !email) {
+            alert("You must be logged in to subscribe.");
+            window.location.href = "login.html";
+            return;
+        }
+
+        const plan = document.getElementById("selected-plan").value;
+        const amount = document.getElementById("amount").value;
+        const address = document.getElementById("address").value;
+        const paymentMethod = document.getElementById("paymentMethod").value;
+
+        if (!plan || !amount || !address || !paymentMethod) {
+            alert("Please fill all fields.");
+            return;
+        }
+
+        const response = await fetch(`http://localhost:8080/api/subscription/subscribe/${email}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                plan: plan,
+                amount: amount,
+                address: address,
+                paymentMethod: paymentMethod
+            })
+        });
+
+        const result = await response.text();
+
+        if (result === "Subscription saved") {
+            document.getElementById("confirmation").innerHTML = `
+                <p style="color: green;"><b>Your order has been successfully placed.</b></p>
+                <p><b>Order will be delivered within 1 hour.</b></p>
+            `;
+        } else {
+            alert("Failed to subscribe: " + result);
+        }
+    }
+    </script>
+</body>
+</html>

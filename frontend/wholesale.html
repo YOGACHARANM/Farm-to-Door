@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wholesale Vegetables - Farm Fresh</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('images/b.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(241, 106, 15, 0.8);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+        }
+
+        /* Main Content Styles */
+        main {
+            padding: 40px 20px;
+            
+            border-radius: 12px;
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+
+        /* Update Section Styles */
+        .update-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .update-section input[type="date"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        /* Vegetables List Styles */
+        .vegetables-list {
+            display: flex;
+            flex-wrap: wrap;
+            color:#fff;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .vegetable-item {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: 220px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .vegetable-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .vegetable-item h3 {
+            margin: 0;
+            font-size: 1.5em;
+            color:rgba(241, 106, 15, 0.8);;
+        }
+
+        .vegetable-item p {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        /* Button Styles */
+        button {
+            background-color:rgba(241, 106, 15, 0.8);;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px;
+            padding: 12px 20px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: rgba(241, 106, 15, 0.8);;
+        }
+
+        /* Order Form Styles */
+        .order-form {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            margin: 30px auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+            display: none;
+        }
+
+        .order-form h2 {
+            margin-top: 0;
+            text-align: center;
+            color:rgba(241, 106, 15, 0.8);;
+        }
+
+        .order-form label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        .order-form input, .order-form select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .order-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: rgba(241, 106, 15, 0.8);;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .order-form button:hover {
+            background-color: #f89808;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: rgba(241, 106, 15, 0.8);
+            color: white;
+            text-align: center;
+            padding: 5px 0;
+            margin-top: 30px;
+            position: sticky;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .vegetable-item {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Farm Fresh Vegetables Wholesale</h1>
+        <p>Connecting Farmers with Businesses and Consumers</p>
+    </header>
+
+    <main>
+        <section class="update-section">
+            <label for="date">Select Date:</label>
+            <input type="date" id="date" name="date">
+        </section>
+
+        <section class="vegetables-list">
+            <h2>Available Vegetables</h2>
+            <div class="vegetable-item">
+                <h3>Tomatoes</h3>
+                <p>Price: ₹120 per kg</p>
+                <button onclick="placeOrder('Tomatoes')">Order Now</button>
+            </div>
+            <div class="vegetable-item">
+                <h3>Carrots</h3>
+                <p>Price: ₹100 per kg</p>
+                <button onclick="placeOrder('Carrots')">Order Now</button>
+            </div>
+            <div class="vegetable-item">
+                <h3>Onion</h3>
+                <p>Price: ₹60 per kg</p>
+                <button onclick="placeOrder('Onion')">Order Now</button>
+            </div>
+            <div class="vegetable-item">
+                <h3>Brinjal</h3>
+                <p>Price: ₹50 per kg</p>
+                <button onclick="placeOrder('Brinjal')">Order Now</button>
+            </div>
+        </section>
+
+        <section class="order-form" id="order-form">
+            <h2>Place Your Order</h2>
+            <form id="orderForm">
+                <label for="vegetable">Vegetable:</label>
+                <input type="text" id="vegetable" name="vegetable" readonly>
+
+                <label for="quantity">Quantity (kg):</label>
+                <input type="number" id="quantity" name="quantity" min="1" required>
+
+                <label for="customerName">Customer Name:</label>
+                <input type="text" id="customerName" name="customerName" required>
+
+                <label for="contact">Contact Number:</label>
+                <input type="tel" id="contact" name="contact" required>
+
+                <label for="payment">Mode of Payment:</label>
+                <select id="payment" name="payment" required>
+                    <option value="">Select Payment Method</option>
+                    <option value="cash">Cash on Delivery</option>
+                    <option value="upi">UPI</option>
+                    <option value="card">Credit/Debit Card</option>
+                </select>
+
+                <button type="submit">Submit Order</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Farm Fresh. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Function to show the order form and set the selected vegetable
+        function placeOrder(vegetable) {
+            document.getElementById('order-form').style.display = 'block';
+            document.getElementById('vegetable').value = vegetable;
+        }
+
+        // Form submission event listener
+        document.getElementById('orderForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const vegetable = document.getElementById('vegetable').value;
+            const quantity = document.getElementById('quantity').value;
+            const customerName = document.getElementById('customerName').value;
+            const contact = document.getElementById('contact').value;
+            const payment = document.getElementById('payment').value;
+
+            alert(`Order placed for ${quantity} kg of ${vegetable} by ${customerName}. Contact: ${contact}. Payment Method: ${payment}`);
+            
+            // Clear the form after submission
+            document.getElementById('orderForm').reset();
+            document.getElementById('order-form').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
