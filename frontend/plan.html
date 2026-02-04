@@ -1,282 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farm Fresh Vegetables</title>
-    <link rel="stylesheet" href="plan.css">
+    <title>Plans | Farm-to-Door</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        .active-plan {
+            border-color: var(--primary-color);
+            transform: scale(1.05);
+        }
+    </style>
 </head>
+
 <body>
-    <div class="header">
-        <h1>Farm Fresh Vegetables Wholesale</h1>
-        <p>Connecting Farmers with Businesses and Consumers</p>
+    <nav class="navbar">
+        <div class="logo"><a href="main.html">Farm-to-Door 🌿</a></div>
+        <div class="nav-links">
+            <a href="main.html">Home</a>
+            <a href="wholesale.html">Wholesale</a>
+            <a href="plan.html" class="active">Subscription</a>
+            <a href="#about">About</a>
+            <a href="#" id="logout-btn">Logout</a>
+        </div>
+    </nav>
+
+    <div class="section-container">
+        <h2>Select Your Weekly Plan</h2>
+        <div class="plans-container">
+            <div class="plan-card" onclick="selectPlan('Standard', 3000)">
+                <h3>Standard Plan</h3>
+                <p style="font-size: 1.2rem; font-weight: bold; margin: 10px 0;">₹3000 / week</p>
+                <p>5 Seasonal Vegetables (5kg)</p>
+                <ul style="margin-top: 10px; color: #666; font-size: 0.9rem;">
+                    <li>Tomato, Potato, Carrot, Onion, Capsicum</li>
+                </ul>
+            </div>
+            <div class="plan-card" onclick="selectPlan('Family', 5000)">
+                <h3>Family Plan</h3>
+                <p style="font-size: 1.2rem; font-weight: bold; margin: 10px 0;">₹5000 / week</p>
+                <p>10 Seasonal Vegetables (10kg)</p>
+                <ul style="margin-top: 10px; color: #666; font-size: 0.9rem;">
+                    <li>Everything in Standard + Spinach, Garlic, Ginger...</li>
+                </ul>
+            </div>
+            <div class="plan-card" onclick="selectPlan('Custom', 0)">
+                <h3>Custom Plan</h3>
+                <p style="font-size: 1.2rem; font-weight: bold; margin: 10px 0;">Custom Pricing</p>
+                <p>Design your own package</p>
+                <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">Select from available produce</p>
+            </div>
+        </div>
     </div>
 
-    <div class="footer">
-        <p>2024 Farm Fresh. All rights reserved.</p>
-    </div>
-    
-    <div class="plans" id="plans">
-        <h2>Select Your Plan</h2>
-        <div class="plan-card" onclick="selectPlan('Standard', 3000, 5)">
-            <h3>Standard Plan</h3>
-            <p>Price: ₹3000</p>
-            <p>5 seasonal vegetables</p>
-        </div>
-        <div class="plan-card" onclick="selectPlan('Family', 5000, 10)">
-            <h3>Family Plan</h3>
-            <p>Price: ₹5000</p>
-            <p>10 seasonal vegetables</p>
-        </div>
-        <div class="plan-card" onclick="selectPlan('Custom', 0, 0)">
-            <h3>Custom Plan</h3>
-            <p>Design your own package!</p>
-        </div>
-    </div>
-
-    <div id="details" class="hidden">
-        <h2>Plan Details</h2>
-        <h3>Included Vegetables:</h3>
+    <!-- Details Section -->
+    <div id="details" class="section-container hidden"
+        style="background: var(--bg-white); border-radius: 12px; padding: 2rem;">
+        <h3 id="plan-title-display">Plan Details</h3>
         <div id="vegetable-list" class="vegetable-list"></div>
     </div>
 
-    <div id="customer-form">
-        <h2>Customer Details</h2>
-        <div class="form-container">
+    <!-- Form Section -->
+    <div id="customer-form" class="section-container hidden" style="max-width: 600px;">
+        <div
+            style="background: #fff; padding: 2rem; border-radius: 12px; box-shadow: var(--box-shadow); text-align: left;">
+            <h3 style="margin-bottom: 20px;">Delivery Details</h3>
 
             <div class="form-group">
-                <label for="address">Address:</label>
-                <textarea id="address" placeholder="Enter your address" required></textarea>
+                <label for="address">Delivery Address</label>
+                <textarea id="address" rows="3" placeholder="Full address" required></textarea>
             </div>
 
             <div class="form-group">
-                <label for="selected-plan">Selected Plan:</label>
-                <input type="text" id="selected-plan" readonly required>
-            </div>
-
-            <div class="form-group">
-                <label for="amount">Amount:</label>
-                <input type="text" id="amount" readonly required>
-            </div>
-
-            <div class="form-group">
-                <label for="paymentMethod">Payment Method:</label>
-                <select id="paymentMethod" required>
+                <label for="paymentMethod">Payment Method</label>
+                <select id="paymentMethod">
                     <option value="Net Banking">Net Banking</option>
                     <option value="Credit Card">Credit Card</option>
                     <option value="UPI">UPI</option>
                 </select>
             </div>
 
-            <button onclick="submitOrder()">Subscribe</button>
-
-            <div id="confirmation" style="margin-top: 10px;"></div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+                <div>
+                    <p style="font-size: 0.9rem; color: #666;">Total Amount</p>
+                    <p id="amount-display" style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color);">₹0
+                    </p>
+                </div>
+                <button onclick="submitOrder()" class="btn action-btn">Subscribe Now</button>
+            </div>
         </div>
     </div>
 
-    </div>
+    <footer>
+        <p>&copy; 2026 Farm-to-Door Platform. All rights reserved.</p>
+    </footer>
 
     <script>
-    
+        // Data
         const vegetablePlans = {
             "Standard": ["Tomato", "Potato", "Carrot", "Onion", "Capsicum"],
             "Family": ["Tomato", "Potato", "Carrot", "Onion", "Capsicum", "Cucumber", "Spinach", "Cabbage", "Garlic", "Ginger"],
-            "Custom": ["Tomato", "Potato", "Carrot", "Onion", "Cabbage"] 
+            "Custom": ["Tomato", "Potato", "Carrot", "Onion", "Cabbage"]
         };
 
-    
-        function selectPlan(plan, price, count) {
+        let selectedPlanName = "";
+        let selectedAmount = 0;
+
+        function selectPlan(plan, price) {
+            selectedPlanName = plan;
+            selectedAmount = price;
+
             document.getElementById("details").classList.remove("hidden");
             document.getElementById("customer-form").classList.remove("hidden");
+            document.getElementById("plan-title-display").innerText = plan + " Plan Selection";
+            document.getElementById("amount-display").innerText = price === 0 ? "Calculated at Checkout" : "₹" + price;
 
-            document.getElementById("selected-plan").value = plan;
-            document.getElementById("amount").value = price === 0 ? "Custom Pricing" : `₹${price}`;
+            // Render Vegetables
+            const list = document.getElementById("vegetable-list");
+            list.innerHTML = "";
 
-            let vegList = document.getElementById("vegetable-list");
-            vegList.innerHTML = ""; // Clear previous content
+            // Highlight card
+            document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('active-plan'));
+            event.currentTarget.classList.add('active-plan');
 
             if (plan === "Custom") {
-                displayCustomPlan(); // Show custom plan with images and dropdowns
-            } else if (plan === "Family") {
-                displayFamilyPlan(); // Show Family Plan in two columns
+                vegetablePlans[plan].forEach(veg => {
+                    const div = document.createElement("div");
+                    div.className = "veg-card";
+                    div.innerHTML = `<img src="image/${veg.toLowerCase()}.jpg" onerror="this.src='https://via.placeholder.com/80?text=${veg}'" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+                                     <p>${veg}</p>
+                                     <select><option>1 kg</option><option>2 kg</option></select>`;
+                    list.appendChild(div);
+                });
+                list.style.display = 'flex';
+                list.style.gap = '10px';
             } else {
-                displayStandardPlan(); // Show Standard Plan in a single column
+                vegetablePlans[plan].forEach((veg, i) => {
+                    const div = document.createElement("div");
+                    div.className = "veg-item";
+                    div.innerHTML = `<span>${i + 1}. ${veg}</span>`;
+                    list.appendChild(div);
+                });
+                list.style.display = 'block';
+            }
+
+            // Scroll to details
+            document.getElementById("details").scrollIntoView({ behavior: "smooth" });
+        }
+
+        async function submitOrder() {
+            const email = sessionStorage.getItem("email");
+            if (!email) {
+                alert("Please login first.");
+                window.location.href = "login.html";
+                return;
+            }
+
+            const address = document.getElementById("address").value;
+            const paymentMethod = document.getElementById("paymentMethod").value;
+
+            if (!address) {
+                alert("Address is required.");
+                return;
+            }
+
+            const payload = {
+                plan: selectedPlanName,
+                amount: selectedAmount, // Note: Backend expects string or int? Original code sent string "₹3000". Let's send raw number or string based on API.
+                address: address,
+                paymentMethod: paymentMethod
+            };
+
+            // Adjust payload to match backend if needed. Assuming backend takes string for amount.
+            // Original code: "amount": amount (which was from input value)
+
+            try {
+                const res = await fetch(`http://localhost:8080/api/subscription/subscribe/${email}`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+
+                const txt = await res.text();
+                alert(txt);
+                if (txt.toLowerCase().includes("saved") || txt.toLowerCase().includes("success")) {
+                    window.location.href = "main.html";
+                }
+            } catch (e) {
+                console.error(e);
+                alert("Failed to connect to backend.");
             }
         }
 
-
-
-        // Function to display Standard Plan vegetables
-        function displayStandardPlan() {
-            let vegList = document.getElementById("vegetable-list");
-            vegList.className = "vegetable-list standard-list";
-
-            vegetablePlans["Standard"].forEach((veg, index) => {
-                let vegItem = document.createElement("div");
-                vegItem.className = "veg-item";
-
-                let number = document.createElement("span");
-                number.className = "veg-number";
-                number.textContent = `${index + 1}.`;
-
-                let name = document.createElement("span");
-                name.className = "veg-name";
-                name.textContent = veg;
-
-                vegItem.appendChild(number);
-                vegItem.appendChild(name);
-                vegList.appendChild(vegItem);
-            });
-        }
-
-
-
-        // Function to display Family Plan vegetables in two columns
-        function displayFamilyPlan() {
-            let vegList = document.getElementById("vegetable-list");
-            vegList.className = "vegetable-list family-list";
-
-            let firstColumn = document.createElement("div");
-            firstColumn.className = "column";
-            let secondColumn = document.createElement("div");
-            secondColumn.className = "column";
-
-            vegetablePlans["Family"].forEach((veg, index) => {
-                let vegItem = document.createElement("div");
-                vegItem.className = "veg-item";
-
-                let number = document.createElement("span");
-                number.className = "veg-number";
-                number.textContent = `${index + 1}.`;
-
-                let name = document.createElement("span");
-                name.className = "veg-name";
-                name.textContent = veg;
-
-                vegItem.appendChild(number);
-                vegItem.appendChild(name);
-
-                if (index < 5) {
-                    firstColumn.appendChild(vegItem);
-                } else {
-                    secondColumn.appendChild(vegItem);
-                }
-            });
-
-            vegList.appendChild(firstColumn);
-            vegList.appendChild(secondColumn);
-        }
-
-
-
-        // Function to display Custom Plan vegetables in a flex row
-        function displayCustomPlan() {
-            let vegList = document.getElementById("vegetable-list");
-            vegList.className = "vegetable-list custom-list";
-
-            vegetablePlans["Custom"].forEach(veg => {
-                let vegCard = document.createElement("div");
-                vegCard.className = "veg-card";
-
-                let img = document.createElement("img");
-                img.src = `image/${veg.toLowerCase()}.jpg`; // Ensure images exist
-                img.alt = veg;
-
-                let name = document.createElement("p");
-                name.textContent = veg;
-
-                let select = document.createElement("select");
-                select.innerHTML = `
-                    <option value="1">1 kg</option>
-                    <option value="2">2 kg</option>
-                    <option value="3">3 kg</option>
-                    <option value="4">4 kg</option>
-                `;
-
-                vegCard.appendChild(img);
-                vegCard.appendChild(name);
-                vegCard.appendChild(select);
-                vegList.appendChild(vegCard);
-            });
-        }
-
-
- function submitOrder() {
-    const username = sessionStorage.getItem("username");
-
-    if (!username) {
-        alert("You must be logged in to subscribe.");
-        window.location.href = "login.html";
-        return;
-    }
-
-    const plan = document.getElementById("selected-plan").value;
-    const amount = document.getElementById("amount").value;
-    const address = document.getElementById("address").value;
-    const paymentMethod = document.querySelector("select").value;
-
-    if (address === "") {
-        alert("Please fill in your address.");
-        return;
-    }
-
-    const data = { plan, amount, address, paymentMethod };
-
-    fetch(`http://localhost:8080/api/subscription/subscribe/${username}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    })
-    .then(res => res.text())
-    .then(msg => {
-        alert(msg);
-        if (msg.includes("saved")) {
-            window.location.href = "main.html";
-        }
-    });
-}
- async function submitOrder() {
-        const loggedIn = sessionStorage.getItem("loggedIn");
-        const email = sessionStorage.getItem("email");
-
-        if (!loggedIn || !email) {
-            alert("You must be logged in to subscribe.");
+        document.getElementById("logout-btn").addEventListener("click", (e) => {
+            e.preventDefault();
+            sessionStorage.clear();
             window.location.href = "login.html";
-            return;
-        }
-
-        const plan = document.getElementById("selected-plan").value;
-        const amount = document.getElementById("amount").value;
-        const address = document.getElementById("address").value;
-        const paymentMethod = document.getElementById("paymentMethod").value;
-
-        if (!plan || !amount || !address || !paymentMethod) {
-            alert("Please fill all fields.");
-            return;
-        }
-
-        const response = await fetch(`http://localhost:8080/api/subscription/subscribe/${email}`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                plan: plan,
-                amount: amount,
-                address: address,
-                paymentMethod: paymentMethod
-            })
         });
-
-        const result = await response.text();
-
-        if (result === "Subscription saved") {
-            document.getElementById("confirmation").innerHTML = `
-                <p style="color: green;"><b>Your order has been successfully placed.</b></p>
-                <p><b>Order will be delivered within 1 hour.</b></p>
-            `;
-        } else {
-            alert("Failed to subscribe: " + result);
-        }
-    }
     </script>
 </body>
+
 </html>

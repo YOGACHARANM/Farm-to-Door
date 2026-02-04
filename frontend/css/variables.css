@@ -1,0 +1,23 @@
+:root {
+    /* Premium Color Palette */
+    --primary-color: #2E5B3E;    /* Deep Forest Green */
+    --primary-dark: #1F3F2A;     /* Darker Green for hover */
+    --secondary-color: #8B4513;  /* Saddle Brown */
+    --accent-color: #D4AF37;     /* Gold */
+    --accent-hover: #B89630;
+    
+    --bg-light: #F9F9F4;         /* Off-white/Cream background */
+    --bg-white: #FFFFFF;
+    --text-primary: #333333;
+    --text-secondary: #555555;
+    --text-light: #F9F9F4;
+
+    /* Spacing & Layout */
+    --border-radius: 12px;
+    --box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    --transition-speed: 0.3s;
+    
+    /* Typography */
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+}
