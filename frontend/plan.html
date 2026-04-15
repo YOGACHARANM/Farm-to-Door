@@ -101,6 +101,7 @@
         <p>&copy; 2026 Farm-to-Door Platform. All rights reserved.</p>
     </footer>
 
+    <script src="js/config.js"></script>
     <script>
         // Data
         const vegetablePlans = {
@@ -181,7 +182,7 @@
             // Original code: "amount": amount (which was from input value)
 
             try {
-                const res = await fetch(`http://localhost:8080/api/subscription/subscribe/${email}`, {
+                const res = await fetch(`${API_BASE_URL}/api/subscription/subscribe/${email}`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "NIXPACKS",
+    "buildCommand": "cd backend/foodapp && ./mvnw clean package -DskipTests"
+  },
+  "deploy": {
+    "startCommand": "java -jar backend/foodapp/target/*.jar",
+    "healthcheckPath": "/api/auth/health",
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 3
+  }
+}

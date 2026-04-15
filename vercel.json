@@ -1,19 +1,8 @@
 {
   "version": 2,
   "outputDirectory": "frontend",
-  "builds": [
-    {
-      "src": "frontend/**",
-      "use": "@vercel/static"
-    }
-  ],
   "routes": [
-    { "src": "/", "dest": "/frontend/login.html" },
-    { "src": "/login", "dest": "/frontend/login.html" },
-    { "src": "/signup", "dest": "/frontend/signup.html" },
-    { "src": "/main", "dest": "/frontend/main.html" },
-    { "src": "/wholesale", "dest": "/frontend/wholesale.html" },
-    { "src": "/plan", "dest": "/frontend/plan.html" },
-    { "src": "/(.*)", "dest": "/frontend/$1" }
+    { "src": "/", "dest": "/login.html" },
+    { "src": "/(.*)", "dest": "/$1" }
   ]
 }
