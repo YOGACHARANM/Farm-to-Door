@@ -1,7 +1,7 @@
 :root {
     /* Premium Color Palette */
-    --primary-color: #2E5B3E;    /* Deep Forest Green */
-    --primary-dark: #1F3F2A;     /* Darker Green for hover */
+    --primary-color: #1F3F2A;    /* Deep Forest Green */
+    --primary-dark: #2E5B3E;     /* Darker Green for hover */
     --secondary-color: #8B4513;  /* Saddle Brown */
     --accent-color: #D4AF37;     /* Gold */
     --accent-hover: #B89630;
@@ -14,7 +14,7 @@
 
     /* Spacing & Layout */
     --border-radius: 12px;
-    --box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    --box-shadow: 0 9px 16px rgba(0, 0, 0, 0.08);
     --transition-speed: 0.3s;
     
     /* Typography */
