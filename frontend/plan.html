@@ -116,8 +116,8 @@
             selectedPlanName = plan;
             selectedAmount = price;
 
-            document.getElementById("details").classList.remove("hidden");
             document.getElementById("customer-form").classList.remove("hidden");
+             document.getElementById("details").classList.remove("hidden");
             document.getElementById("plan-title-display").innerText = plan + " Plan Selection";
             document.getElementById("amount-display").innerText = price === 0 ? "Calculated at Checkout" : "₹" + price;
 
@@ -162,8 +162,9 @@
                 return;
             }
 
-            const address = document.getElementById("address").value;
+          
             const paymentMethod = document.getElementById("paymentMethod").value;
+              const address = document.getElementById("address").value;
 
             if (!address) {
                 alert("Address is required.");
