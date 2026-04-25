@@ -48,7 +48,7 @@ ul {
 
 .nav-links a {
     color: var(--text-light);
-    margin-left: 1.5rem;
+    margin-left: 1.6rem;
     font-weight: 500;
     position: relative;
 }
@@ -61,8 +61,8 @@ ul {
     content: '';
     position: absolute;
     width: 0;
-    height: 2px;
-    bottom: -4px;
+    height: 3px;
+    bottom: -3px;
     left: 0;
     background-color: var(--accent-color);
     transition: width var(--transition-speed);
@@ -86,7 +86,7 @@ header {
 }
 
 .header-container h1 {
-    font-size: 3rem;
+    font-size: 4rem;
     margin-bottom: 1rem;
     color: var(--accent-color);
 }
@@ -115,7 +115,7 @@ h2 {
 h2::after {
     content: '';
     display: block;
-    width: 50px;
+    width: 60px;
     height: 4px;
     background: var(--accent-color);
     margin: 0.5rem auto 0;
