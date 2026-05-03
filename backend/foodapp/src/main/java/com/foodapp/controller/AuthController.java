@@ -1,8 +1,9 @@
 package com.foodapp.controller;
 
 import com.foodapp.model.User;
-import com.foodapp.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import com.foodapp.repository.UserRepository;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,6 +14,7 @@ public class AuthController {
     @Autowired
     private UserRepository userRepo;
 
+    
     @Autowired
     private org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
 
