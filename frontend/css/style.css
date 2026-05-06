@@ -37,6 +37,8 @@ ul {
     box-shadow: var(--box-shadow);
     position: sticky;
     top: 0;
+      /* position: sticky;
+    top: 0; */
     z-index: 1000;
 }
 
