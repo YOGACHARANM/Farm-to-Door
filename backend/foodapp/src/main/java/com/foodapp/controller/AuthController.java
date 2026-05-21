@@ -18,6 +18,7 @@ public class AuthController {
     @Autowired
     private org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
 
+    
     @PostMapping("/signup")
     public String signup(@RequestBody User user) {
         if (userRepo.findByEmail(user.getEmail()) != null) {
