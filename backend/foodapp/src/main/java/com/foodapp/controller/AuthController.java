@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.foodapp.repository.UserRepository;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin(origins = "*")
