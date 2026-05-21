@@ -1,7 +1,6 @@
 package com.foodapp.controller;
 
 import com.foodapp.model.User;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import com.foodapp.repository.UserRepository;
 import org.springframework.web.bind.annotation.*;
